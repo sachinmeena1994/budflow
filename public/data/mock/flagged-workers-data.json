@@ -1,0 +1,52 @@
+[
+  { 
+    "id": "1", 
+    "name": "Sarah Chen", 
+    "workType": "Breakdown", 
+    "gph": 190, 
+    "targetGph": 220, 
+    "premiumPercent": 78.5, 
+    "flagLevel": "red", 
+    "flagReason": ">10% below target" 
+  },
+  { 
+    "id": "2", 
+    "name": "Mike Rodriguez", 
+    "workType": "Hand Trim", 
+    "gph": 205, 
+    "targetGph": 230, 
+    "premiumPercent": 82.1, 
+    "flagLevel": "orange", 
+    "flagReason": "5-10% below target" 
+  },
+  { 
+    "id": "3", 
+    "name": "Emily Davis", 
+    "workType": "Machine", 
+    "gph": 180, 
+    "targetGph": 200, 
+    "premiumPercent": 75.3, 
+    "flagLevel": "red", 
+    "flagReason": ">10% below target" 
+  },
+  { 
+    "id": "4", 
+    "name": "Alex Johnson", 
+    "workType": "Breakdown", 
+    "gph": 215, 
+    "targetGph": 240, 
+    "premiumPercent": 80.8, 
+    "flagLevel": "orange", 
+    "flagReason": "5-10% below target" 
+  },
+  { 
+    "id": "5", 
+    "name": "Jordan Kim", 
+    "workType": "Hand Trim", 
+    "gph": 175, 
+    "targetGph": 210, 
+    "premiumPercent": 71.2, 
+    "flagLevel": "red", 
+    "flagReason": ">10% below target" 
+  }
+]

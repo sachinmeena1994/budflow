@@ -1,0 +1,297 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Productivity Table Compact Styles */
+.productivity-table {
+  --table-cell-padding: 0.25rem 0.5rem;
+  --table-text-size: 0.75rem;
+  --table-row-height: 2rem;
+}
+
+.productivity-table .table-cell {
+  padding: var(--table-cell-padding);
+  font-size: var(--table-text-size);
+  line-height: 1.25;
+  min-height: var(--table-row-height);
+}
+
+.productivity-table .table-header {
+  padding: var(--table-cell-padding);
+  font-size: var(--table-text-size);
+  font-weight: 600;
+  text-transform: none;
+}
+
+.productivity-table input[type="text"],
+.productivity-table input[type="number"],
+.productivity-table input[type="date"],
+.productivity-table select,
+.productivity-table textarea {
+  font-size: var(--table-text-size);
+  padding: 0.125rem 0.25rem;
+  min-height: 1.5rem;
+  border-radius: 0.25rem;
+}
+
+.productivity-table .badge {
+  font-size: 0.625rem;
+  padding: 0.125rem 0.375rem;
+}
+
+.productivity-table .button {
+  font-size: var(--table-text-size);
+  padding: 0.125rem 0.25rem;
+  min-height: 1.5rem;
+}
+
+/* Reduce dropdown and multi-select sizes */
+.productivity-table .multi-select-item {
+  font-size: 0.625rem;
+  padding: 0.0625rem 0.25rem;
+}
+
+/* Compact row styling */
+.productivity-table tr {
+  height: var(--table-row-height);
+}
+
+.productivity-table td {
+  vertical-align: middle;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+/* Required field marker styling */
+.required-field-marker {
+  color: hsl(var(--destructive));
+  margin-left: 0.125rem;
+}
+
+@layer base {
+  :root {
+    /* Background and foreground */
+    --background: 0 0% 100%;
+    --foreground: 142 100% 8%;
+
+    /* Card styles */
+    --card: 0 0% 100%;
+    --card-foreground: 142 100% 8%;
+
+    /* Popover styles */
+    --popover: 0 0% 100%;
+    --popover-foreground: 142 100% 8%;
+
+    /* Leaf Green - Primary */
+    --primary: 142 100% 14%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Kief Green - Secondary */
+    --secondary: 72 100% 43%;
+    --secondary-foreground: 140 100% 10%;
+
+    /* Resin Red - Accent/Warning */
+    --accent: 14 72% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Muted UI elements */
+    --muted: 142 20% 96%;
+    --muted-foreground: 142 10% 40%;
+
+    /* Warning/critical color #CF4520 */
+    --destructive: 14 72% 47%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Status colors */
+    /* Success uses primary color (Leaf Green) */
+    --success: 142 100% 14%;
+    --success-foreground: 0 0% 100%;
+    /* Warning uses accent color (Resin Red) */
+    --warning: 14 72% 47%;
+    --warning-foreground: 0 0% 100%;
+    /* Info uses a complementary blue */
+    --info: 205 83% 40%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 142 20% 88%;
+    --input: 142 20% 88%;
+    /* Match primary for ring */
+    --ring: 142 100% 14%;
+
+    --radius: 0.5rem;
+
+    /* Sidebar with primary dark green theme */
+    --sidebar-background: 142 30% 15%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 142 100% 14%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 142 20% 20%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 142 30% 25%;
+    --sidebar-ring: 142 100% 14%;
+
+    /* Cannabis colors in RGB format for opacity support */
+    --cannabis-50: 230, 245, 235;
+    --cannabis-100: 196, 214, 0;
+    --cannabis-200: 160, 200, 160;
+    --cannabis-300: 120, 180, 130;
+    --cannabis-400: 60, 140, 90;
+    --cannabis-500: 0, 70, 30;
+    --cannabis-600: 0, 60, 25;
+    --cannabis-700: 0, 50, 20;
+    --cannabis-800: 0, 40, 15;
+    --cannabis-900: 0, 30, 10;
+
+    /* Font families */
+    --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .dark {
+    --background: 142 30% 10%;
+    --foreground: 0 0% 96%;
+
+    --card: 142 30% 12%;
+    --card-foreground: 0 0% 96%;
+
+    --popover: 142 30% 12%;
+    --popover-foreground: 0 0% 96%;
+
+    /* Dark mode still uses the same primary color */
+    --primary: 142 100% 14%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary color in dark mode */
+    --secondary: 72 100% 43%;
+    --secondary-foreground: 140 100% 10%;
+
+    /* Muted UI elements in dark mode */
+    --muted: 142 20% 20%;
+    --muted-foreground: 142 10% 75%;
+
+    /* Accent color in dark mode */
+    --accent: 14 72% 47%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Dark mode warning/critical color */
+    --destructive: 14 72% 47%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Status colors - dark mode */
+    --success: 142 100% 14%;
+    --success-foreground: 0 0% 100%;
+    --warning: 14 72% 47%;
+    --warning-foreground: 0 0% 100%;
+    --info: 205 83% 40%;
+    --info-foreground: 0 0% 100%;
+
+    --border: 142 20% 25%;
+    --input: 142 20% 25%;
+    --ring: 142 100% 14%;
+    
+    /* Sidebar in dark mode */
+    --sidebar-background: 142 30% 8%;
+    --sidebar-foreground: 0 0% 96%;
+    --sidebar-primary: 142 100% 14%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 142 20% 15%;
+    --sidebar-accent-foreground: 0 0% 96%;
+    --sidebar-border: 142 20% 20%;
+    --sidebar-ring: 142 100% 14%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Add gradient backgrounds for visual appeal */
+  .cannabis-gradient-bg {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary)/0.8) 100%);
+  }
+  
+  .cannabis-card-gradient {
+    background: linear-gradient(to bottom right, 
+      rgba(var(--cannabis-50), 0.5), 
+      rgba(var(--cannabis-100), 0.1));
+  }
+}
+
+@layer components {
+  /* Atomic Design Component Styles */
+  
+  /* Atoms */
+  .cannabis-text-input {
+    @apply bg-background border border-input rounded-md px-3 py-2 text-sm w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring;
+  }
+  
+  .cannabis-label {
+    @apply block text-sm font-medium text-foreground mb-1.5;
+  }
+  
+  .cannabis-badge {
+    @apply inline-flex items-center rounded-full px-2 py-1 text-xs font-medium;
+  }
+  
+  /* Molecules */
+  .cannabis-form-group {
+    @apply mb-4;
+  }
+  
+  .cannabis-hover-transition {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Organisms */
+  .cannabis-card {
+    @apply rounded-lg border border-border bg-card p-6 shadow-sm cannabis-hover-transition;
+  }
+  
+  .cannabis-stat-card {
+    @apply cannabis-card flex flex-col gap-2;
+  }
+  
+  .cannabis-table-container {
+    @apply w-full overflow-auto rounded-md border;
+  }
+  
+  /* Status Badges */
+  .status-badge-success {
+    @apply bg-success/20 text-success;
+  }
+  
+  .status-badge-warning {
+    @apply bg-warning/20 text-warning;
+  }
+  
+  .status-badge-info {
+    @apply bg-info/20 text-info;
+  }
+  
+  .status-badge-error {
+    @apply bg-destructive/20 text-destructive;
+  }
+  
+  /* Enhanced UI components */
+  .cannabis-button {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .cannabis-section {
+    @apply p-6 border border-border rounded-lg bg-card shadow-sm;
+  }
+  
+  /* Navigation elements */
+  .cannabis-nav-item {
+    @apply flex items-center text-sm px-3 py-2 rounded-md hover:bg-secondary/20 transition-colors;
+  }
+  
+  .cannabis-nav-item.active {
+    @apply bg-primary text-primary-foreground;
+  }
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "1",
+    "name": "Sarah Chen",
+    "workType": "Hand Trim",
+    "gph": 128.5,
+    "targetGph": 100,
+    "performanceLevel": "high",
+    "efficiency": 128.5
+  },
+  {
+    "id": "2", 
+    "name": "Marcus Rodriguez",
+    "workType": "Machine Trim",
+    "gph": 245.2,
+    "targetGph": 200,
+    "performanceLevel": "high",
+    "efficiency": 122.6
+  },
+  {
+    "id": "3",
+    "name": "Emily Watson",
+    "workType": "Bucking",
+    "gph": 89.7,
+    "targetGph": 75,
+    "performanceLevel": "high", 
+    "efficiency": 119.6
+  },
+  {
+    "id": "4",
+    "name": "David Kim",
+    "workType": "Packaging",
+    "gph": 156.3,
+    "targetGph": 135,
+    "performanceLevel": "high",
+    "efficiency": 115.8
+  },
+  {
+    "id": "5",
+    "name": "Lisa Thompson",
+    "workType": "Hand Trim", 
+    "gph": 112.8,
+    "targetGph": 100,
+    "performanceLevel": "high",
+    "efficiency": 112.8
+  }
+]

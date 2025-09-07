@@ -1,0 +1,51 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+.env
+
+build
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local .terraform directory (plugins, module cache, workspace metadata)
+.terraform/
+
+# Terraform state files (can contain sensitive data like secrets)
+*.tfstate
+*.tfstate.backup
+
+# Crash logs (useful locally, but no need to track in Git)
+crash.log
+
+# Sensitive variable definition files (typically not tracked)
+*.tfvars
+*.tfvars.json
+
+# Override files (local-only configurations)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration file (contains user credentials, etc.)
+.terraformrc
+terraform.rc

@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Skip commitizen if it's a merge or squash
+COMMIT_SOURCE=$2
+if [ "$COMMIT_SOURCE" = "merge" ] || [ "$COMMIT_SOURCE" = "squash" ]; then
+  exit 0
+fi
+
+exec < /dev/tty && npx cz --hook || true

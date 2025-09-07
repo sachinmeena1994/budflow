@@ -1,0 +1,182 @@
+stages:
+  - install
+  - lint
+  - test
+  - build
+  - plan
+  - deploy
+  
+default:
+  image: node:22
+
+cache:
+  paths:
+    - node_modules
+
+workflow:
+  rules:
+    # Run for merge requests to specific branches only
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(develop-cleanup|qa|stg|master)$/'
+      when: always
+    # Run for direct pushes to specific branches
+    - if: '$CI_COMMIT_BRANCH =~ /^(develop-cleanup|qa|stg|master)$/'
+      when: always
+    # Never run the pipeline for other conditions
+    - when: never
+
+variables:
+  TF_ROOT: "terraform"
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_DEFAULT_REGION: "us-east-1"
+  GIT_USER: "gitlab-ci-token"
+
+install_dependencies:
+  stage: install
+  script:
+    - corepack enable
+    - npm install
+  artifacts:
+    paths:
+      - node_modules
+    expire_in: 1 hour
+
+# lint:
+#   stage: lint
+#   dependencies:
+#     - install_dependencies
+#   script:
+#     - corepack enable
+#     - yarn run lint
+
+# test:
+#   stage: test
+#   dependencies:
+#     - install_dependencies
+#   script:
+#     - echo "test completed"
+
+# test:
+#   stage: test
+#   script:
+#     - core pack enable
+#     - npm run test
+#   artifacts:
+#     paths:
+#       - coverage/
+#     reports:
+#       junit: src/coverage/junit.xml
+#       coverage_report:
+#         coverage_format: cobertura
+#         path: src/coverage/cobertura-coverage.xml
+
+build:
+  stage: build
+  dependencies:
+    - install_dependencies
+  script:
+    - corepack enable
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "develop-cleanup" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "develop-cleanup" ]; then
+        VITE_MODE="dev"
+      elif [ "$CI_COMMIT_BRANCH" = "qa" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "qa" ]; then
+        VITE_MODE="qa"
+      elif [ "$CI_COMMIT_BRANCH" = "stg" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "stg" ]; then
+        VITE_MODE="stg"
+      elif [ "$CI_COMMIT_BRANCH" = "master" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "master" ]; then
+        VITE_MODE="prd"
+      else
+        VITE_MODE="dev"
+      fi
+    - echo "Selected mode $VITE_MODE"
+    - npm run build -- --mode $VITE_MODE
+  artifacts:
+    paths:
+      - dist
+
+plan:
+  stage: plan
+  image:
+    name: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/releases/1.4:v1.0.0"
+  script:
+    - git config --global url."https://${GIT_USER}:${GIT_PAT}@gitlab.com/".insteadOf "https://gitlab.com/"
+    - terraform -version
+    - cd $TF_ROOT
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "develop-cleanup" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "develop-cleanup" ]; then
+        WORKSPACE_NAME="dev"
+      elif [ "$CI_COMMIT_BRANCH" = "qa" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "qa" ]; then
+        WORKSPACE_NAME="qa"
+      elif [ "$CI_COMMIT_BRANCH" = "stg" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "stg" ]; then
+        WORKSPACE_NAME="stg"
+      elif [ "$CI_COMMIT_BRANCH" = "master" ] || [ "$CI_MERGE_REQUEST_TARGET_BRANCH_NAME" = "master" ]; then
+        WORKSPACE_NAME="prd"
+      else
+        echo "Unsupported branch or target: $CI_COMMIT_BRANCH / $CI_MERGE_REQUEST_TARGET_BRANCH_NAME"
+        exit 1
+      fi
+    - echo "Selected workspace $WORKSPACE_NAME"
+    - terraform init --upgrade
+    - terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+    - terraform plan
+  dependencies:
+    - build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME =~ /^(develop-cleanup|qa|stg|master)$/'
+      when: always
+    - if: '$CI_COMMIT_BRANCH == "develop-cleanup" || $CI_COMMIT_BRANCH == "qa" || $CI_COMMIT_BRANCH == "stg" || $CI_COMMIT_BRANCH == "master"'  
+      when: always
+    - when: never
+
+deploy_auto:
+  stage: deploy
+  image:
+    name: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/releases/1.4:v1.0.0"
+  script:
+    - git config --global url."https://${GIT_USER}:${GIT_PAT}@gitlab.com/".insteadOf "https://gitlab.com/"
+    - terraform -version
+    - cd $TF_ROOT
+    - |
+      if [ "$CI_COMMIT_BRANCH" = "develop-cleanup" ]; then
+        WORKSPACE_NAME="dev"
+      elif [ "$CI_COMMIT_BRANCH" = "qa" ]; then
+        WORKSPACE_NAME="qa"
+      elif [ "$CI_COMMIT_BRANCH" = "stg" ]; then
+        WORKSPACE_NAME="stg"
+      else
+        echo "Unsupported target branch: $CI_COMMIT_BRANCH"
+        exit 1
+      fi
+    - echo "Selected workspace $WORKSPACE_NAME"
+    - terraform init --upgrade
+    - terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+    - terraform plan
+    - terraform apply -auto-approve
+  dependencies:
+    - build
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^(develop-cleanup|qa|stg)$/'
+      when: always
+    - when: never
+
+deploy_manual:
+  stage: deploy
+  image:
+    name: "$CI_TEMPLATE_REGISTRY_HOST/gitlab-org/terraform-images/releases/1.4:v1.0.0"
+  script:
+    - git config --global url."https://${GIT_USER}:${GIT_PAT}@gitlab.com/".insteadOf "https://gitlab.com/"
+    - terraform -version
+    - cd $TF_ROOT
+    - WORKSPACE_NAME="prd"
+    - echo "Selected workspace $WORKSPACE_NAME"
+    - terraform init --upgrade
+    - terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+    - terraform plan
+    - terraform apply -auto-approve
+  dependencies:
+    - build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual
+    - when: never
+

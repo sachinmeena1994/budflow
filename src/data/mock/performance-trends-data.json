@@ -1,0 +1,46 @@
+{
+  "workTypeTargets": {
+    "breakdown": { "label": "Breakdown", "target": 1800, "unit": "g/hr" },
+    "handTrim": { "label": "Hand Trim", "target": 180, "unit": "g/hr" },
+    "harvest": { "label": "Harvest", "target": 20, "unit": "plants/hr" },
+    "machine": { "label": "Machine", "target": 4500, "unit": "g/hr" }
+  },
+  "trendData": {
+    "breakdown": [
+      { "date": "Jul 15", "value": 1580, "target": 1800 },
+      { "date": "Jul 16", "value": 1650, "target": 1800 },
+      { "date": "Jul 17", "value": 1720, "target": 1800 },
+      { "date": "Jul 18", "value": 1780, "target": 1800 },
+      { "date": "Jul 19", "value": 1810, "target": 1800 },
+      { "date": "Jul 20", "value": 1850, "target": 1800 },
+      { "date": "Jul 21", "value": 1830, "target": 1800 }
+    ],
+    "handTrim": [
+      { "date": "Jul 15", "value": 155, "target": 180 },
+      { "date": "Jul 16", "value": 162, "target": 180 },
+      { "date": "Jul 17", "value": 168, "target": 180 },
+      { "date": "Jul 18", "value": 174, "target": 180 },
+      { "date": "Jul 19", "value": 182, "target": 180 },
+      { "date": "Jul 20", "value": 185, "target": 180 },
+      { "date": "Jul 21", "value": 178, "target": 180 }
+    ],
+    "harvest": [
+      { "date": "Jul 15", "value": 17, "target": 20 },
+      { "date": "Jul 16", "value": 18, "target": 20 },
+      { "date": "Jul 17", "value": 19, "target": 20 },
+      { "date": "Jul 18", "value": 21, "target": 20 },
+      { "date": "Jul 19", "value": 22, "target": 20 },
+      { "date": "Jul 20", "value": 23, "target": 20 },
+      { "date": "Jul 21", "value": 21, "target": 20 }
+    ],
+    "machine": [
+      { "date": "Jul 15", "value": 4100, "target": 4500 },
+      { "date": "Jul 16", "value": 4250, "target": 4500 },
+      { "date": "Jul 17", "value": 4350, "target": 4500 },
+      { "date": "Jul 18", "value": 4480, "target": 4500 },
+      { "date": "Jul 19", "value": 4520, "target": 4500 },
+      { "date": "Jul 20", "value": 4580, "target": 4500 },
+      { "date": "Jul 21", "value": 4450, "target": 4500 }
+    ]
+  }
+}

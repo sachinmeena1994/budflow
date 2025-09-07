@@ -1,0 +1,38 @@
+{
+  "today": {
+    "breakdown": { "value": 1750, "target": 1800 },
+    "handTrim": { "value": 172, "target": 180 },
+    "harvest": { "value": 22, "target": 20 },
+    "machine": { "value": 4200, "target": 4500 },
+    "abRatio": { "value": 85, "target": 90 },
+    "premiumRetention": { "value": 87.5, "target": 85 },
+    "flaggedWorkers": { "value": 8, "target": 5 }
+  },
+  "yesterday": {
+    "breakdown": { "value": 1820, "target": 1800 },
+    "handTrim": { "value": 185, "target": 180 },
+    "harvest": { "value": 19, "target": 20 },
+    "machine": { "value": 4650, "target": 4500 },
+    "abRatio": { "value": 92, "target": 90 },
+    "premiumRetention": { "value": 89.2, "target": 85 },
+    "flaggedWorkers": { "value": 3, "target": 5 }
+  },
+  "last7days": {
+    "breakdown": { "value": 1780, "target": 1800 },
+    "handTrim": { "value": 178, "target": 180 },
+    "harvest": { "value": 20.5, "target": 20 },
+    "machine": { "value": 4400, "target": 4500 },
+    "abRatio": { "value": 88, "target": 90 },
+    "premiumRetention": { "value": 86.8, "target": 85 },
+    "flaggedWorkers": { "value": 6, "target": 5 }
+  },
+  "last30days": {
+    "breakdown": { "value": 1795, "target": 1800 },
+    "handTrim": { "value": 182, "target": 180 },
+    "harvest": { "value": 21.2, "target": 20 },
+    "machine": { "value": 4550, "target": 4500 },
+    "abRatio": { "value": 89.5, "target": 90 },
+    "premiumRetention": { "value": 88.1, "target": 85 },
+    "flaggedWorkers": { "value": 4, "target": 5 }
+  }
+}
